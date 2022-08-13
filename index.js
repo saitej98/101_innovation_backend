@@ -3,6 +3,7 @@ const Food = require("./src/Models/food");
 const cors = require("cors");
 const connect = require("./src/Configs/db");
 const app = express();
+const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
 app.use(cors());
@@ -36,7 +37,7 @@ app.get("/:id", async (req, res) => {
 });
 
 app;
-app.listen(8080, async () => {
+app.listen(PORT, async () => {
   try {
     await connect();
     console.log("listening port 8080");
