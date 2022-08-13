@@ -12,15 +12,14 @@ app.post("/", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
-  Food.find({}, (err, desc) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(desc);
-    }
-  });
-});
+app.get("/", async (req, res) => {
+  try {
+      const items = await Food.find().lean().exec();
+      return res.status(201).send(items)
+  } catch (er) {
+      return res.status(500).send(er.message)
+  }
+})
 app.get("/:id", async (req, res) => {
   try {
     // console.log(req.params.id)
