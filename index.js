@@ -1,10 +1,12 @@
 const express = require("express");
 const Food = require("./src/Models/food");
 const cors = require("cors");
-const app = express();
-app.use(cors());
-app.use(express.json());
 const connect = require("./src/Configs/db");
+const app = express();
+
+app.use(express.json());
+app.use(cors());
+
 app.post("/", async (req, res) => {
   try {
     const item = await Food.create(req.body);
@@ -22,6 +24,7 @@ app.get("/", async (req, res) => {
     return res.status(500).send(er.message);
   }
 });
+
 app.get("/:id", async (req, res) => {
   try {
     // console.log(req.params.id)
