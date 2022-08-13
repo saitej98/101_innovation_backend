@@ -1,6 +1,8 @@
 const express = require("express");
 const Food = require("./src/Models/food");
+const cors = require("cors");
 const app = express();
+app.use(cors());
 app.use(express.json());
 const connect = require("./src/Configs/db");
 app.post("/", async (req, res) => {
@@ -14,12 +16,12 @@ app.post("/", async (req, res) => {
 
 app.get("/", async (req, res) => {
   try {
-      const items = await Food.find().lean().exec();
-      return res.status(201).send(items)
+    const items = await Food.find().lean().exec();
+    return res.status(201).send(items);
   } catch (er) {
-      return res.status(500).send(er.message)
+    return res.status(500).send(er.message);
   }
-})
+});
 app.get("/:id", async (req, res) => {
   try {
     // console.log(req.params.id)
