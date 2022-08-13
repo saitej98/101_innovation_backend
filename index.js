@@ -12,7 +12,7 @@ app.post("/", async (req, res) => {
   }
 });
 
-app.get("/items", (req, res) => {
+app.get("/", (req, res) => {
   Food.find({}, (err, desc) => {
     if (err) {
       console.log(err);
